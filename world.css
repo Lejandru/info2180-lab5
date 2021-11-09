@@ -5,10 +5,10 @@
 header{
     text-align: center;
     margin: 0px auto;
-    background-color: blue;
+    background-color: black;
 }
 header h1{
-    color: black;
+    color: blue;
 }
 header .imagetest{
     margin: 10px;

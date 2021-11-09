@@ -4,18 +4,21 @@ $username = 'lab5_user';
 $password = 'password123';
 $dbname = 'world';
 
+$host = 'localhost';
+$username = 'lab5_user';
+$password = 'password123';
+$dbname = 'world';
+
 $country = $_GET['country'];
 $city = $_GET['context'];
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$test = $conn->query("SELECT * FROM cities INNER JOIN countries ON cities.country_code = countries.code WHERE countries.name = '$country'");
+$test = $conn->query("SELECT city.name, city.district,city.population FROM cities city LEFT JOIN countries country ON city.country_code = country.code  WHERE country.name LIKE '%$country%'");
 $caught = $test->fetchALL(PDO::FETCH_ASSOC);
 
-
 ?>
-<?php if($country == ""):?>
-<hr>
+<?php if($city == 'country'):?>
 <table class = 'table'>
   <tr>
     <th>Name</th>
@@ -31,7 +34,7 @@ $caught = $test->fetchALL(PDO::FETCH_ASSOC);
     <td><?=$row['head_of_state'];?></td>
 </tr>
 <?php endforeach;?>
-<?php elseif($city == ''):?> 
+<?php elseif($city == 'cities'):?> 
 <table class = 'table'>
   <tr>
     <th>Name</th>
@@ -46,5 +49,4 @@ $caught = $test->fetchALL(PDO::FETCH_ASSOC);
 </tr>
 <?php endforeach;?>
 <?php endif;?>
-
 
